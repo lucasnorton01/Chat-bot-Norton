@@ -98,7 +98,7 @@ const INSTRUCCION_SISTEMA = `
 `;
 
 // --- FRONTEND EMBEDIDO ---
-app.get('/api/v1/chat', (req, res) => {
+app.get('/', (req, res) => {
   res.send(`
     <!DOCTYPE html>
     <html lang="es">
