@@ -104,46 +104,45 @@ app.get('/', (req, res) => {
     <html lang="es">
     <head>
       <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
       <title>ChatBot de Norton</title>
 
       <link rel="icon" type="image/jpeg" href="/images.jpg">
       <script src="https://cdn.tailwindcss.com"></script>
       <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+      
+      <style>
+        /* ESTO EVITA QUE EL TECLADO DEL CELULAR RECORTE EL CHAT */
+        html, body { height: 100%; margin: 0; }
+        #chatWrapper { height: 100vh; }
+      </style>
     </head>
     <body class="bg-gradient-to-br from-slate-900 via-blue-900 to-cyan-800 font-sans h-screen relative overflow-hidden select-none">
 
       <div id="fondoBienvenida" class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-center w-11/12 max-w-xl transition-all duration-300 pointer-events-none drop-shadow-md">
-        <h1 class="text-4xl sm:text-5xl font-black text-white mb-4 tracking-tight">
-          Bienvenido al ChatBot de <span class="text-cyan-400">Lucas Norton</span>
-        </h1>
-        <p class="text-lg text-cyan-200/80 font-medium">
-          Haz clic en el robot abajo a la derecha para iniciar una conversación 
-        </p>
+        <h1 class="text-3xl sm:text-5xl font-black text-white mb-4 tracking-tight">Bienvenido a <span class="text-cyan-400">Norton's Bot</span></h1>
+        <p class="text-lg text-cyan-200/80 font-medium">Haz clic en el robot para comenzar</p>
       </div>
 
-      <div id="chatWrapper" class="hidden fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-50 transition-all duration-300">
-        <div class="w-[480px] h-[600px] bg-white rounded-2xl shadow-2xl flex flex-col overflow-hidden">
-          
-          <div class="bg-neutral-900 text-white p-5 text-center font-bold text-lg tracking-wide border-b-4 border-cyan-500">
+      <div id="chatWrapper" class="hidden fixed inset-0 z-50 flex items-center justify-center p-2">
+        <div class="w-full max-w-[480px] h-[90vh] bg-white rounded-2xl shadow-2xl flex flex-col overflow-hidden">
+          <div class="bg-neutral-900 text-white p-4 text-center font-bold text-lg border-b-4 border-cyan-500">
             🤖 NORTON´S ChatBot
           </div>
-          
-          <div id="chatBox" class="p-5 flex-1 overflow-y-auto flex flex-col gap-3 bg-slate-50">
-            <div class="p-3 px-4 rounded-xl max-w-[80%] break-words line-clamp-none bg-white text-slate-800 self-start border border-slate-200 rounded-bl-none text-[0.95em] leading-relaxed">
-              ¡Hola! ¿En qué puedo colaborar contigo hoy? ✨
+          <div id="chatBox" class="p-4 flex-1 overflow-y-auto flex flex-col gap-3 bg-slate-50">
+            <div class="p-3 px-4 rounded-xl max-w-[90%] bg-white text-slate-800 self-start border border-slate-200 rounded-bl-none text-[0.95em]">
+              ¡Hola! ¿En qué puedo colaborar hoy? ✨
             </div>
           </div>
-          
-          <div class="flex border-t border-slate-100 p-4 bg-white gap-3">
-            <input type="text" id="userInput" placeholder="Escribe tu mensaje..." onkeypress="if(event.key === 'Enter') enviar()" class="flex-1 p-3.5 border border-slate-200 rounded-lg outline-none focus:border-cyan-500 transition-colors">
-            <button onclick="enviar()" class="bg-cyan-500 hover:bg-cyan-600 text-white font-bold px-6 rounded-lg transition-colors">Enviar</button>
+          <div class="flex border-t border-slate-100 p-3 bg-white gap-2">
+            <input type="text" id="userInput" placeholder="Escribe..." onkeypress="if(event.key === 'Enter') enviar()" class="flex-1 p-3 border border-slate-300 rounded-lg outline-none focus:border-cyan-500 text-[16px]">
+            <button onclick="enviar()" class="bg-cyan-500 text-white font-bold px-5 rounded-lg active:scale-95 transition-transform">Enviar</button>
           </div>
-
         </div>
       </div>
 
-      <button id="chatLauncher" onclick="toggleChat()" class="fixed bottom-6 right-8 w-16 h-16 rounded-full flex justify-center items-center shadow-2xl hover:scale-110 active:scale-95 animate-bounce transition-all duration-200 z-50 border-2 border-cyan-400 outline-none overflow-hidden p-0 bg-black">
-        <img id="launcherIcon" src="/autobot.jpg" alt="Robot" class="w-full h-full object-cover scale-125">
+      <button id="chatLauncher" onclick="toggleChat()" class="fixed bottom-6 right-6 w-14 h-14 rounded-full shadow-2xl animate-bounce z-50 border-2 border-cyan-400 bg-black overflow-hidden p-0">
+        <img id="launcherIcon" src="/autobot.jpg" alt="Robot" class="w-full h-full object-cover">
       </button>
 
       <script>
